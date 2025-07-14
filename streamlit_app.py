@@ -1,6 +1,11 @@
 import streamlit as st
 
-st.title("🎈 My new app")
+st.title("Buy vs rent calculator")
 st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
+    "Compare your final wealth under either scenario"
 )
+
+
+def calculator(i, n = 30):
+    return
+

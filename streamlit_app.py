@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
+import plotly.express as px
 
 
 st.title("Buy vs rent calculator")
@@ -90,10 +91,6 @@ def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, year
     schedule_df['Wealth if Buying'] = schedule_df['House Value'] - schedule_df['Remaining Balance'] - schedule_df['Cummulative Mortgage Payment'] - schedule_df['Cummulative Housing Expenses']
     schedule_df['Wealth if Renting'] = schedule_df['Investment Account'] - schedule_df['Cummulative Rent']
     return schedule_df
-
-
-    
-
 
 def main():
     st.set_page_config(layout='wide')

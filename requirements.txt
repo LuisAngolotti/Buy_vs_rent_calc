@@ -9,3 +9,4 @@ statsmodels
 streamlit
 streamlit-player
 streamlit-plotly-events
+plotly.express

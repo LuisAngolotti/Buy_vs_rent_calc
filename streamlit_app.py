@@ -9,14 +9,14 @@ st.write(
     "What would your wealth be after 30 years if you bought a house or rented it instead?"
 )
 
-def rent_payment(house_price, down_payment, interest_rate, years):
+def rent_payment_fn(house_price, down_payment, interest_rate, years):
     monthly_rate = (interest_rate /100 ) / 12
     principal = house_price * (1 - down_payment / 100)
     n_payments = years * 12
     monthly_payment = principal * (monthly_rate * (1 + monthly_rate)**n_payments) / ((1 + monthly_rate)**n_payments - 1)
     return monthly_payment
 
-def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, years, monthly_payment):
+def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, years, rent_payment):
     """
     Calculate payment schedule and investment schedule
     """
@@ -37,7 +37,7 @@ def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, year
     remaining_balance = house_price * (1-down_payment/100)
     investment_account = house_price * down_payment/100
     house_value = house_price
-    annual_rent_payment = monthly_payment * 12
+    annual_rent_payment = rent_payment * 12
     housing_expenses = 0
     cum_housing_expenses = 0
     cum_rent_payment = 0
@@ -107,7 +107,7 @@ def main():
     # capital_gains_tax = st.number_input("Capital gains tax, in percent", value = 25 )
     mortgage_rate = st.number_input("Mortgage rate, in percent", value = 1.5 )
     mortgage_length = st.number_input("Mortgage length, in years", value = 30 )
-    rent_pmnt = st.number_input("Typical monthly rent for a house of that price", value = rent_payment(house_price, down_payment, mortgage_rate, mortgage_length))
+    rent_pmnt = st.number_input("Typical monthly rent for a house of that price", value = rent_payment_fn(house_price, down_payment, mortgage_rate, mortgage_length))
     df = schedule(house_price, down_payment, mortgage_rate, inlfation_rate, real_return, mortgage_length, rent_pmnt)
     # df = schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, years)
     chart_data = df[['Year', 'Wealth if Buying', 'Wealth if Renting']].set_index('Year')

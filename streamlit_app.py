@@ -103,7 +103,7 @@ def main():
     rent_pmnt = st.number_input("Typical monthly rent for a house of that price", value = rent_payment(house_price, down_payment, mortgage_rate, mortgage_length))
     df = schedule(house_price, down_payment, mortgage_rate, inlfation_rate, real_return, mortgage_length, rent_pmnt)
     # df = schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, years)
-    chart_data = df[['Year', 'Wealth Buying', 'Wealth Renting']].set_index('Year')
+    chart_data = df[['Year', 'Wealth if Buying', 'Wealth if Renting']].set_index('Year')
     st.line_chart(chart_data)
     
     st.dataframe(df)

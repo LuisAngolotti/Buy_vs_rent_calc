@@ -1,19 +1,14 @@
-# 🎈 Blank app template
+# Buy vs Rent Calculator
 
-A simple Streamlit app template for you to modify!
+Have you ever wondered if it's better to buy a house or rent it?
+The answer may surprise you!
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+Long story short: it all depends on the assumptions you make.
+The good thing is that with this tool, you can play with the assumptions and figure out what scenario you are most comfortable with.
 
-### How to run it on your own machine
 
-1. Install the requirements
+### Some important assumptions:
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+The scenario plays over 30 years by default, which is the typical lenght of a first mortgage and long enough for most assumptios to hold on average.
 
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+We are assuming that house prices follow inflation rates over this 30 year period, and that inflation rate is close to the 2% targetted by most OECD central banks. This may seem low given recent raises in house prices but, as a famous economist once said, "If something can't go on forever, it won't".

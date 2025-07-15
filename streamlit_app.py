@@ -9,7 +9,14 @@ st.write(
     "What would your wealth be after 30 years if you 1) bought the house or 2) rented it instead?"
 )
 
-def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, years):
+def rent_payment(house_price, down_payment, interest_rate, years):
+    monthly_rate = (interest_rate /100 ) / 12
+    principal = house_price * (1 - down_payment / 100)
+    n_payments = years * 12
+    monthly_payment = principal * (monthly_rate * (1 + monthly_rate)**n_payments) / ((1 + monthly_rate)**n_payments - 1)
+    return monthly_payment
+
+def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, years, monthly_payment):
     """
     Calculate payment schedule and investment schedule
     """
@@ -23,19 +30,20 @@ def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, year
     # Calculate monthly payment and yearly rent
     principal = house_price * (1 - down_payment / 100)
     monthly_payment = principal * (monthly_rate * (1 + monthly_rate)**n_payments) / ((1 + monthly_rate)**n_payments - 1)
-    rent_payment = monthly_payment * 12
+    # rent_payment = monthly_payment * 12
     
     # Initialize variables for tracking
     yearly_schedule = []
     remaining_balance = house_price * (1-down_payment/100)
     investment_account = house_price * down_payment/100
     house_value = house_price
+    annual_rent_payment = monthly_payment * 12
     housing_expenses = 0
     # Calculate payments for each year
     for year in range(1, years + 1):
         yearly_interest = 0
         yearly_principal = 0
-        rent_payment = rent_payment * (1+inflation_rate/100)
+        annual_rent_payment = annual_rent_payment * (1+inflation_rate/100)
         investment_account = investment_account * (1+inflation_rate/100+ERP/100)      
         house_value = house_value * (1+inflation_rate/100)
         housing_expenses = house_value * 0.03
@@ -62,7 +70,7 @@ def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, year
             'Remaining Balance': remaining_balance,
             'House Value': house_value,
             'Housing Expenses': housing_expenses,
-            'Rent': rent_payment,
+            'Rent': annual_rent_payment,
             'Investment Account': investment_account
         })
     
@@ -92,15 +100,16 @@ def main():
     # capital_gains_tax = st.number_input("Capital gains tax, in percent", value = 25 )
     mortgage_rate = st.number_input("Mortgage rate, in percent", value = 1.5 )
     mortgage_length = st.number_input("Mortgage length, in years", value = 30 )
-    df = schedule(house_price, down_payment, mortgage_rate, inlfation_rate, real_return, mortgage_length)
+    rent_pmnt = st.number_input("Monthly rent payment", value = rent_payment(house_price, down_payment, mortgage_rate, mortgage_length))
+    df = schedule(house_price, down_payment, mortgage_rate, inlfation_rate, real_return, mortgage_length, rent_pmnt)
     # df = schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, years)
     st.dataframe(df)
 
-    st.write(
-    "Some assumptions:" \
-    "Long-term, house prices grow in tandem with inflation "
-    "(I know it sounds unrealistic today, but on average across 30 years, it holds pretty well)"
-)
+#     st.write(
+#     "Some assumptions:" \
+#     "Long-term, house prices grow in tandem with inflation "
+#     "(I know it sounds unrealistic today, but on average across 30 years, it holds pretty well)"
+# )
 
 if __name__ == '__main__':
     main()

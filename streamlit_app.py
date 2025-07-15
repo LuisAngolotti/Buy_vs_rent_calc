@@ -9,8 +9,11 @@ st.write(
     "What would be your wealth after 30 years if you 1) bought the house or 2) rented it instead?"
 )
 
-def house_wealth(monthly_rent, inlfation_rate, house_price, down_payment, capital_gains_tax):
-    i = []
+def house_wealth(monthly_rent, inlfation_rate, house_price, down_payment, capital_gains_tax, mortgage_rate, mortgage_length):
+    list_of_years = list(range(0, mortgage_length + 1))
+    wealth = []
+    for i 
+
 
     
 

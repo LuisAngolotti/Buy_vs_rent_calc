@@ -93,10 +93,10 @@ def main():
     # menu = ["Recommender", "Sentiment", "Cluster Analysis"]
     # choice = st.sidebar.radio("Menu", menu)
     # monthly_rent = st.number_input("Monthly rent you would pay for the house you want to buy", value = 1000)
+    house_price = st.number_input("How much is the price of the house, including taxes", value = 400000 )
+    down_payment = st.number_input("Down payment: How much of the house price (incl. taxes) you would pay upfront, in percent", value = 30 )
     inflation_rate = st.number_input("Inflation rate, in percent", value = 2.0 )
     real_return = st.number_input("Annual return above inflation you would get if you invested the down payment in an equity index ETF, in percent", value = 5.0 )
-    house_price = st.number_input("How much is the price of the house, including taxes", value = 400000 )
-    down_payment = st.number_input("How much of the house price (incl. taxes) you would pay upfront, in percent", value = 30 )
     # capital_gains_tax = st.number_input("Capital gains tax, in percent", value = 25 )
     mortgage_rate = st.number_input("Mortgage rate, in percent", value = 1.5 )
     mortgage_length = st.number_input("Mortgage length, in years", value = 30 )
@@ -106,12 +106,6 @@ def main():
     chart_data = df[['Year', 'Wealth if Buying', 'Wealth if Renting']].set_index('Year')
     st.line_chart(chart_data)
     st.dataframe(df)
-
-#     st.write(
-#     "Some assumptions:" \
-#     "Long-term, house prices grow in tandem with inflation "
-#     "(I know it sounds unrealistic today, but on average across 30 years, it holds pretty well)"
-# )
 
 if __name__ == '__main__':
     main()

@@ -104,7 +104,7 @@ def main():
     # capital_gains_tax = st.number_input("Capital gains tax, in percent", value = 25 )
     mortgage_rate = st.number_input("Mortgage rate, in percent", value = 1.5 )
     mortgage_length = st.number_input("Mortgage length, in years", value = 30 )
-    rent_pmnt = st.number_input("Typical monthly rent for a house of that price", value = rent_payment_fn(house_price, down_payment, mortgage_rate, mortgage_length))
+    rent_pmnt = st.number_input("Typical monthly rent for a house of that price", value = rent_payment_fn(house_price, down_payment, mortgage_rate, mortgage_length)*1.35)
     df = schedule(house_price, down_payment, mortgage_rate, inlfation_rate, real_return, mortgage_length, rent_pmnt)
     # df = schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, years)
     chart_data = df[['Year', 'Wealth if Buying', 'Wealth if Renting']].set_index('Year')

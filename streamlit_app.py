@@ -11,7 +11,7 @@ st.write(
 )
 
 def rent_payment_fn(house_price, inflation_rate, spread = 0.025, housing_costs = 0.015):
-    return house_price * (inflation_rate + spread - housing_costs)/12
+    return house_price * (inflation_rate/100 + spread - housing_costs)/12
 
 def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, years, rent_payment):
     """

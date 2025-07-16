@@ -10,12 +10,8 @@ st.write(
     "What would your wealth be after 30 years if you bought a house or rented it instead?"
 )
 
-def rent_payment_fn(house_price, down_payment, interest_rate, years):
-    monthly_rate = (interest_rate /100 ) / 12
-    principal = house_price * (1 - down_payment / 100)
-    n_payments = years * 12
-    monthly_payment = principal * (monthly_rate * (1 + monthly_rate)**n_payments) / ((1 + monthly_rate)**n_payments - 1)
-    return monthly_payment
+def rent_payment_fn(house_price, inflation_rate, spread = 0.025, housing_costs = 0.015):
+    return house_price * (inflation_rate + spread - housing_costs)/12
 
 def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, years, rent_payment):
     """
@@ -50,7 +46,7 @@ def schedule(house_price, down_payment, interest_rate, inflation_rate, ERP, year
         annual_rent_payment = annual_rent_payment * (1+inflation_rate/100)
         investment_account = investment_account * (1+inflation_rate/100+ERP/100)      
         house_value = house_value * (1+inflation_rate/100)
-        housing_expenses = house_value * 0.015 # Assuming 3% of house value as annual housing expenses (maintenance, property tax, etc.)
+        housing_expenses = house_value * 0.015 # Assuming 1.5% of house value as annual housing expenses (maintenance, property tax, etc.)
         # Calculate monthly payments for the current year
         for _ in range(12):
             # Calculate interest for this month
